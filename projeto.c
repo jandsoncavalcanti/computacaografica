@@ -3,41 +3,53 @@
 #include <GL/glut.h>
 #include "stdio.h"
 
-static int shoulder_x = 0, shoulder_y = 0, shoulder_z = 0, elbow = 0;
-//GLUquadricObj *obj = gluNewQuadric();
+static int shoulder_x = 0, shoulder_y = 0, shoulder_z = 0, elbow_x, elbow_y, elbow_z = 0;
 
 void init(void) 
 {
 	glClearColor (0.0, 0.0, 0.0, 0.0);
 	glShadeModel (GL_FLAT);
 }
-
+//a translacao dos cilindros é feita somada com a da transformacao para ajustar a movimentacao
 void display(void)
 {
 	GLUquadricObj *obj = gluNewQuadric();
 	glClear (GL_COLOR_BUFFER_BIT);
 	glPushMatrix();
-	glTranslatef (0.0, -2.0, 0.0);//translate objeto
+
+	//desenha primeira esfera
+	glPushMatrix();
+	glTranslatef (0.0, -2.2, 0.0);//translate objeto
+	gluSphere(obj, 0.3, 30, 30);//desenhar esfera
+	glPopMatrix();
+
+	//desenha primeiro cilindro
+	glTranslatef (0.0, -2.2, 0.0);//translate objeto
 	glRotatef ((GLfloat) shoulder_x, 1.0, 0.0, 0.0);//rotate x
 	glRotatef ((GLfloat) shoulder_y, 0.0, 1.0, 0.0);//rotate y
 	glRotatef ((GLfloat) shoulder_z, 0.0, 0.0, 1.0);//rotate z
-	printf("%i %i %i \n",shoulder_x,shoulder_y,shoulder_z);//teste
-	glTranslatef (0.0, 0.4, 0.0);//translate transformacao
+	//printf("%i %i %i \n",shoulder_x,shoulder_y,shoulder_z);//teste
+	glTranslatef (0.0, 0.2, 0.0);//translate transformacao
 	glPushMatrix();
 	glRotatef(-90.0f, 1.0f, 0.0f, 0.0f);//ajuste
-	gluCylinder(obj, 0.2, 0.2, 2, 30, 30);//desenhar cilindro - salva variaveis
-	//glScalef (0.4, 2.0, 0.4);
-	//glutWireCube (1.0);
+	gluCylinder(obj, 0.2, 0.2, 2, 30, 30);//desenhar cilindro
 	glPopMatrix();
 
-	glTranslatef (0.0, 2.0, 0.0);
-	glRotatef ((GLfloat) elbow, 0.0, 0.0, 1.0);
-	glTranslatef (0.0, 0.4, 0.0);
+	//desenha segunda esfera
 	glPushMatrix();
-	glScalef (0.4, 2.0, 0.4);
+	glTranslatef (0.0, 2.2, 0.0);//translate objeto
+	gluSphere(obj, 0.3, 30, 30);//desenhar cilindro - salva variaveis
+	glPopMatrix();
+
+	//desenha segundo cilindro
+	glTranslatef (0.0, 2.2, 0.0);//translate objeto
+	glRotatef ((GLfloat) elbow_x, 1.0, 0.0, 0.0);
+	glRotatef ((GLfloat) elbow_y, 0.0, 1.0, 0.0);
+	glRotatef ((GLfloat) elbow_z, 0.0, 0.0, 1.0);
+	glTranslatef (0.0, 0.2, 0.0);//translate transformacao
+	glPushMatrix();
 	glRotatef(-90.0f, 1.0f, 0.0f, 0.0f);
-	gluCylinder(obj, 0.5, 0.5, 1, 30, 30);
-//glutWireCube (1.0);
+	gluCylinder(obj, 0.2, 0.2, 2, 30, 30);
 	glPopMatrix();
 
 	glPopMatrix();
@@ -52,13 +64,13 @@ void reshape (int w, int h)
 	gluPerspective(65.0, (GLfloat) w/(GLfloat) h, 1.0, 20.0);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	glTranslatef (0.0, 0.0, -5.0);
+	glTranslatef (0.0, 0.0, -10.0);
 }
 
 void keyboard (unsigned char key, int x, int y)
 {
 	switch (key) {
-		case 'q':   /*  s key rotates at shoulder  */
+		case 'q':
 			if (shoulder_x > -60) {shoulder_x -= 5;}
 			glutPostRedisplay();
 		break;
@@ -66,7 +78,7 @@ void keyboard (unsigned char key, int x, int y)
 			if (shoulder_x < 60) {shoulder_x +=5;}
 			glutPostRedisplay();
 		break;
-		case 'r':   /*  s key rotates at shoulder  */
+		case 'r':
 			if (shoulder_y > -60) {shoulder_y -= 5;}
 			glutPostRedisplay();
 		break;
@@ -74,12 +86,36 @@ void keyboard (unsigned char key, int x, int y)
 			if (shoulder_y < 60) {shoulder_y +=5;}
 			glutPostRedisplay();
 		break;
-		case 'y':   /*  s key rotates at shoulder  */
+		case 'y':
 			if (shoulder_z > -60) {shoulder_z -= 5;}
 			glutPostRedisplay();
 		break;
 		case 't':
 			if (shoulder_z < 60) {shoulder_z +=5;}
+			glutPostRedisplay();
+		break;
+		case 'a':
+			if (elbow_x > -60) {elbow_x -= 5;}
+			glutPostRedisplay();
+		break;
+		case 's':
+			if (elbow_x < 60) {elbow_x +=5;}
+			glutPostRedisplay();
+		break;
+		case 'f':
+			if (elbow_y > -60) {elbow_y -= 5;}
+			glutPostRedisplay();
+		break;
+		case 'd':
+			if (elbow_y < 60) {elbow_y +=5;}
+			glutPostRedisplay();
+		break;
+		case 'h':
+			if (elbow_z > -60) {elbow_z -= 5;}
+			glutPostRedisplay();
+		break;
+		case 'g':
+			if (elbow_z < 60) {elbow_z +=5;}
 			glutPostRedisplay();
 		break;
 		default:
