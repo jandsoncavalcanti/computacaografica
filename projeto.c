@@ -70,6 +70,19 @@ void display(void)
 	gluCylinder(obj, 0.2, 0.2, 2, 30, 30);
 	glPopMatrix();
 
+	glPushMatrix();
+	glTranslatef (0.0, 2.2, 0.0);//translate objeto
+	gluSphere(obj, 0.3, 30, 30);//desenhar cilindro
+	glPopMatrix();
+
+	glTranslatef (0.2, 2.2, 0.0);//translate objeto
+	glTranslatef (0.0, 0.2, 0.0);//translate transformacao
+	glPushMatrix();
+	glRotatef(-90.0f, 1.0f, 0.0f, 0.0f);
+	glRotatef(60.0f, 0.0f, 1.0f, 0.0f);
+	gluCylinder(obj, 0.1, 0.1, 0.5, 30, 30);
+	glPopMatrix();
+
 	glPopMatrix();
 	glutSwapBuffers();
 }
