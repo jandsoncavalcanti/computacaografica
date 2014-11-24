@@ -18,7 +18,7 @@ void display(void)
 	glPushMatrix();
 
 	glPushMatrix();
-	glTranslatef (6.0, 0.0, 0.0);//translate objeto
+	glTranslatef (3.0, 0.0, 0.0);//translate objeto
 	gluSphere(obj, 0.3, 30, 30);//desenhar cilindro
 	glPopMatrix();
 
