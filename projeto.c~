@@ -75,12 +75,31 @@ void display(void)
 	gluSphere(obj, 0.3, 30, 30);//desenhar cilindro
 	glPopMatrix();
 
-	glTranslatef (0.25, 2.2, 0.0);//translate objeto
-	glTranslatef (0.0, 0.2, 0.0);//translate transformacao
+	glTranslatef (0.35, 2.2, -0.2);//translate objeto
+	//glTranslatef (0.0, 0.2, 0.0);//translate transformacao
 	glPushMatrix();
 	glRotatef(-90.0f, 1.0f, 0.0f, 0.0f);
-	glRotatef(60.0f, 0.0f, 1.0f, 0.0f);
-	gluCylinder(obj, 0.1, 0.1, 0.5, 30, 30);
+	//glRotatef(60.0f, 0.0f, 1.0f, 0.0f);
+	//glRotatef(60.0f, 0.0f, 0.0f, 1.0f);
+	gluCylinder(obj, 0.1, 0.1, 1.0, 30, 30);
+	glPopMatrix();
+
+	glTranslatef (-0.7, 0.0, 0.0);//translate objeto
+	//glTranslatef (0.0, 0.2, 0.0);//translate transformacao
+	glPushMatrix();
+	glRotatef(-90.0f, 1.0f, 0.0f, 0.0f);
+	//glRotatef(-60.0f, 0.0f, 1.0f, 0.0f);
+	//glRotatef(60.0f, 0.0f, 0.0f, 1.0f);
+	gluCylinder(obj, 0.1, 0.1, 1.0, 30, 30);
+	glPopMatrix();
+
+	glTranslatef (0.4, 0.0, 0.4);//translate objeto
+	//glTranslatef (0.0, 0.2, 0.0);//translate transformacao
+	glPushMatrix();
+	glRotatef(-90.0f, 1.0f, 0.0f, 0.0f);
+	//glRotatef(-60.0f, 0.0f, 1.0f, 0.0f);
+	//glRotatef(60.0f, 0.0f, 0.0f, 1.0f);
+	gluCylinder(obj, 0.1, 0.1, 1.0, 30, 30);
 	glPopMatrix();
 
 	glPopMatrix();
